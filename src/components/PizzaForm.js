@@ -18,14 +18,14 @@ function PizzaForm(props) {
 
    
    return(
-            <body className = 'form-container'>
+            // <body className = 'form-container'>
         <form id = 'pizza-form' onSubmit={onSubmit}>
             <div>
             <h1>Start Building Your Pizza!</h1>
             </div>
             
             <div>
-            <h4>Enter your name to start</h4>
+            <h4>Enter your name</h4>
             <label>
                 <input 
                 id = 'name-input'
@@ -115,7 +115,7 @@ function PizzaForm(props) {
     
         </form>
 
-             </body>
+            //  </body>
 
 
 

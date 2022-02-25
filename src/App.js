@@ -3,6 +3,8 @@ import axios from "axios";
 import PizzaForm from './components/PizzaForm'
 import Homepage from './components/Homepage'
 import { Switch, Route, Link } from 'react-router-dom'
+import formSchema from "./validation/formSchema";
+import * as yup from 'yup'
 
 const initialFormValues = {
   name: '',
@@ -49,10 +51,20 @@ const [disabled, setDisabled] = useState(initialDisabled)
     
   }
 
-  //validate here 
+  const validate = (name, value) => {
+    yup
+    .reach(formSchema,name)
+    .validate(value)
+    .then(()=> setFormErrors({...formErrors, [name]: '' }))
+    .catch(err => setFormErrors({...formErrors,[name]: err.errors[0] }))
+  }
+
+
+
+
 
   const inputChange = (name, value) => {
-    //validate here
+    validate(name,value)
     setFormValues({...formValues, [name]: value})
   }
 
@@ -65,6 +77,12 @@ const [disabled, setDisabled] = useState(initialDisabled)
     }
     postPizza(newPizza)
   }
+
+  useEffect(()=> {
+    formSchema.isValid(formValues).then(valid => {
+      setDisabled(!valid)
+    })
+  }, [formValues])
 
 
 
@@ -82,7 +100,7 @@ const [disabled, setDisabled] = useState(initialDisabled)
 
       <div className='button2'>
       <Link  to= '/pizza'>
-          <button className= 'order-pizza'>Place Pizza Order</button>
+          <button className= 'order-pizza'>Order Pizza</button>
       </Link>
       </div>
       </header>
@@ -98,7 +116,7 @@ const [disabled, setDisabled] = useState(initialDisabled)
         change={inputChange}
         submit={formSubmit}
         disabled={disabled}
-        // errors={formError}
+        errors={formErrors}
         />
       </Route>
     </Switch>

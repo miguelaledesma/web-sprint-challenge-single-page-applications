@@ -4,7 +4,7 @@ import { useHistory } from "react-router-dom";
 export default function Homepage() {
     const history = useHistory()
 
-    const routeToShop = () => {
+    const orderPizza = () => {
         history.push('/pizza')
     }
     
@@ -17,7 +17,7 @@ export default function Homepage() {
             alt = ''
             />
 
-            <button onClick = {routeToShop} className ='route-button' >Click to Start</button>
+            <button onClick = {orderPizza} id ='order-pizza' >Click to Start</button>
 
         </div>
     )
