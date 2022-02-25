@@ -52,7 +52,7 @@ function PizzaForm(props) {
                 </label>
                 </div>
 
-                <div className ='topping'>
+                <div className ='toppings'>
                     <h4>Add Some Toppings!</h4>  
 
         <label>Pepperoni 

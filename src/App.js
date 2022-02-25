@@ -11,7 +11,7 @@ const initialFormValues = {
   pepperoni: false, 
   ham: false,
   cheese: false, 
-
+  veggies:false,
   special: ''
 
 }
@@ -36,16 +36,34 @@ const [disabled, setDisabled] = useState(initialDisabled)
 
 
 
-  const postNewPizza = newPizza => {
-    axios.post('https://reqres.in/api/orders')
+  const postPizza = newPizza => {
+    axios.post('https://reqres.in/api/orders', newPizza)
     .then(response => {
-      console.log([...pizza, response.data])
+      // console.log([...pizza, response.data])
       setPizza([...pizza, response.data])
+      
     })
     .catch(error => {
       console.error(error)
     })
-    .finally(()=> {setFormValues(initialFormValues)})
+    
+  }
+
+  //validate here 
+
+  const inputChange = (name, value) => {
+    //validate here
+    setFormValues({...formValues, [name]: value})
+  }
+
+  const formSubmit = () => {
+    const newPizza = {
+      name: formValues.name.trim(),
+      size:formValues.size.trim(),
+      special:formValues.special.trim(),
+      toppings: ['pepperoni', 'ham', 'cheese','veggies'].filter(topping => !!formValues[topping])
+    }
+    postPizza(newPizza)
   }
 
 
@@ -77,8 +95,8 @@ const [disabled, setDisabled] = useState(initialDisabled)
       <Route path= '/pizza'>
         <PizzaForm
         values= {formValues}
-        // change={inputChange}
-        // submit={formSubmit}
+        change={inputChange}
+        submit={formSubmit}
         disabled={disabled}
         // errors={formError}
         />
