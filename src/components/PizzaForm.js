@@ -112,6 +112,9 @@ function PizzaForm(props) {
         <button id ='order-button'>Place Order</button>
     </div>
     
+    <div className='errors'>
+                <p>{errors.name}</p>
+            </div>
     
         </form>
 

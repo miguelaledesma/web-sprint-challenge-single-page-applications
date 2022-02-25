@@ -1,11 +1,7 @@
 import * as yup from 'yup'
 
 const formSchema = yup.object().shape({
-    name: yup
-    .string()
-    .trim()
-    .required('Name is required to continue')
-    .min(2,'name must be at least 2 characters'), 
+    
 
     size: yup
     .string()
@@ -14,6 +10,12 @@ const formSchema = yup.object().shape({
     special: yup
     .string()
     .required('Special request required, if none, type N/A.'),
+
+    name: yup
+        .string()
+        .trim()
+        .required('Please enter your name to place your order')
+        .min(2, 'name must be at least 2 characters'),
 
     pepperoni: yup.boolean(),
     ham: yup.boolean(),
